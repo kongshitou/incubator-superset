@@ -26,7 +26,7 @@ describe('sliceEntities reducer', () => {
   it('should set slices', () => {
     const result = sliceEntitiesReducer(
       { slices: { a: {} } },
-      { type: SET_ALL_SLICES, slices: { 1: {}, 2: {} } },
+      { type: SET_ALL_SLICES, payload: { slices: { 1: {}, 2: {} } } },
     );
 
     expect(result.slices).to.deep.equal({
@@ -42,10 +42,10 @@ describe('sliceEntities reducer', () => {
       {},
       {
         type: FETCH_ALL_SLICES_FAILED,
-        error: { responseJSON: { message: 'errorrr' } },
+        payload: { error: 'failed' },
       },
     );
     expect(result.isLoading).to.equal(false);
-    expect(result.errorMessage.indexOf('errorrr')).to.be.above(-1);
+    expect(result.errorMessage.indexOf('failed')).to.be.above(-1);
   });
 });
